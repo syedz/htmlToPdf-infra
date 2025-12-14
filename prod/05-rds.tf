@@ -8,9 +8,10 @@ module "rds" {
 
   name                 = "rds-${var.tag_env}" #"rds"
   engine               = "aurora-mysql"       #"aurora-postgresql"
-  engine_mode          = "serverless"         # Aurora Serverless v2
-  cluster_family       = "aurora-mysql8.0"    # Updated to supported version for Serverless v2
-  cluster_size         = 0                    # Set to 0 for Serverless v2 (no provisioned instances)
+  engine_mode          = "provisioned"        # Changed to provisioned since serverless is unavailable
+  cluster_family       = "aurora-mysql8.0"    # Kept for compatibility
+  cluster_size         = 1                    # Set to 1 for provisioned mode
+  instance_type        = "db.t3.small"        # Required for provisioned mode
   cluster_type         = "regional"           #"regional"
   admin_user           = random_password.rds_admin_username.result
   admin_password       = random_password.rds_password.result
@@ -20,12 +21,6 @@ module "rds" {
   security_groups      = [module.eks.node_security_group_id, aws_security_group.bastion_host.id]
   subnets              = module.vpc.database_subnets
   enable_http_endpoint = true
-
-  # Serverless v2 scaling configuration (replaces v1 scaling_configuration)
-  serverlessv2_scaling_configuration = {
-    max_capacity = 16.0
-    min_capacity = 0.5
-  }
 
   tags = {
     Name = "${var.tag_env}-rds"

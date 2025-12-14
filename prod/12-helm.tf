@@ -150,7 +150,7 @@ resource "helm_release" "ingress-nginx" {
     value = "false"
   }
 
-  depends_on = [module.eks]
+  depends_on = [helm_release.cert-manager, module.eks, aws_acm_certificate_validation.eks_domain_cert_validation]
 }
 
 # main argocd helm chart

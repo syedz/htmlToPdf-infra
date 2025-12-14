@@ -4,7 +4,7 @@
 
 module "eks" {
   source                          = "terraform-aws-modules/eks/aws"
-  cluster_name                    = "eks-${var.tag_env}"
+  cluster_name                    = "htmlToPdf-${var.tag_env}"
   version                         = "20.2.1"
   cluster_version                 = "1.29"
   cluster_endpoint_private_access = true

@@ -11,7 +11,7 @@ module "rds" {
   engine_mode          = "provisioned"        # Changed to provisioned since serverless is unavailable
   cluster_family       = "aurora-mysql8.0"    # Kept for compatibility
   cluster_size         = 1                    # Set to 1 for provisioned mode
-  instance_type        = "db.t3.small"        # Required for provisioned mode
+  instance_type        = "db.t3.medium"        # Required for provisioned mode
   cluster_type         = "regional"           #"regional"
   admin_user           = random_password.rds_admin_username.result
   admin_password       = random_password.rds_password.result

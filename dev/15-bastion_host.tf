@@ -39,7 +39,7 @@ resource "aws_instance" "bastion_host" {
   instance_type          = "t3.small"
   vpc_security_group_ids = [aws_security_group.bastion_host.id]
   key_name               = aws_key_pair.devops.id
-  subnet_id              = element(module.vpc.public_subnets, 2)
+  subnet_id              = element(module.vpc.public_subnets, 1)
   root_block_device {
     volume_size           = 30
     volume_type           = "gp2"

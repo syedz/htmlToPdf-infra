@@ -41,7 +41,7 @@ provider "aws" {
   region = var.aws_region
   default_tags {
     tags = {
-      Team        = "Tentek DevOps"
+      Team        = "Zee DevOps"
       Project     = "DemoApp"
       Environment = "Dev"
       ManagedBy   = "Terraform"

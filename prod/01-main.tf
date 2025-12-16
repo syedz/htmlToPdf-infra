@@ -42,7 +42,7 @@ provider "aws" {
   default_tags {
     tags = {
       Team        = "Zee DevOps"
-      Project     = "DemoApp"
+      Project     = "HTML to PDF"
       Environment = "Prod"
       ManagedBy   = "Terraform"
     }

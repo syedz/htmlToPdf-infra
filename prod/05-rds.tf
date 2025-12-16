@@ -6,7 +6,7 @@ module "rds" {
   source  = "cloudposse/rds-cluster/aws"
   version = "1.7.0"
 
-  name                 = "rds-${var.tag_env}" #"rds"
+  name                 = "${var.tag_env}-${var.project_name}-RDS" #"rds"
   engine               = "aurora-mysql"       #"aurora-postgresql"
   engine_mode          = "provisioned"        # Changed to provisioned since serverless is unavailable
   cluster_family       = "aurora-mysql8.0"    # Kept for compatibility
@@ -23,7 +23,7 @@ module "rds" {
   enable_http_endpoint = true
 
   tags = {
-    Name = "${var.tag_env}-rds"
+    Name = "${var.tag_env}-${var.project_name}-RDS"
   }
 }
 

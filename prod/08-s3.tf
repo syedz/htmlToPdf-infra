@@ -8,7 +8,7 @@ module "s3_bucket_for_output_files" {
   create_bucket = true
   control_object_ownership = true
   object_ownership         = "ObjectWriter"
-  bucket        = "${var.tag_env}-app-output-files-${data.aws_caller_identity.current.account_id}"
+  bucket        = "${var.tag_env}-${var.project_name}-app-output-files-${data.aws_caller_identity.current.account_id}"
   acl           = "private"
   force_destroy = true
 }

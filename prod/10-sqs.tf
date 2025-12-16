@@ -9,7 +9,7 @@ module "sqs" {
   content_based_deduplication = true
   fifo_queue                  = true
   visibility_timeout_seconds  = 360
-  name                        = "${var.tag_env}-conversion-to-pdf-"
+  name                        = "${var.tag_env}-${var.project_name}-conversion-to-pdf-"
   use_name_prefix             = true      # Determines whether "name" is used as a prefix
 
   create = true

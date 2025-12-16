@@ -1,3 +1,9 @@
+variable "project_name" {
+  type    = string
+  description = "Project name for our resources"
+  default =  "htmlToPdf"
+}
+
 variable "base_domain" {
   type    = string
   description = "Base domain for our DNS records"

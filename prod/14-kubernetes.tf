@@ -4,7 +4,11 @@ resource "kubernetes_namespace" "application" {
     name = "application"
   }
 
-  depends_on = [module.eks]
+  depends_on = [module.eks, data.aws_eks_cluster.cluster]
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 # creating repo in argocd
@@ -27,5 +31,9 @@ resource "kubernetes_secret" "demo-repo" {
   }
   type = "Opaque"
 
-  depends_on = [ helm_release.argocd, module.eks ]
+  depends_on = [helm_release.argocd, module.eks, data.aws_eks_cluster.cluster]
+
+  lifecycle {
+    ignore_changes = all
+  }
 }

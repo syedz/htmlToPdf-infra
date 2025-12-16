@@ -24,7 +24,11 @@ resource "helm_release" "ack-lambda" {
     type  = "string"
   }
 
-  depends_on = [module.eks]
+  depends_on = [module.eks, data.aws_eks_cluster.cluster]
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "helm_release" "crd-helm-chart" {
@@ -70,7 +74,11 @@ resource "helm_release" "cert-manager" {
     type  = "string"
   }
 
-  depends_on = [module.eks]
+  depends_on = [module.eks, data.aws_eks_cluster.cluster]
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 # github actions runner creation helm chart
@@ -150,7 +158,11 @@ resource "helm_release" "ingress-nginx" {
     value = "false"
   }
 
-  depends_on = [helm_release.cert-manager, module.eks, aws_acm_certificate_validation.eks_domain_cert_validation]
+  depends_on = [helm_release.cert-manager, module.eks, aws_acm_certificate_validation.eks_domain_cert_validation, data.aws_eks_cluster.cluster]
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 # main argocd helm chart
@@ -195,7 +207,11 @@ resource "helm_release" "argocd" {
     type  = "string"
   }
 
-  depends_on = [module.eks]
+  depends_on = [module.eks, data.aws_eks_cluster.cluster]
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 # argocd-apps helm chart to create application in argocd
@@ -221,7 +237,11 @@ resource "helm_release" "argocd-apps" {
     "${file("helm-chart-values/argo-cd-apps-values.yaml")}"
   ]
 
-  depends_on = [helm_release.argocd, module.eks]
+  depends_on = [helm_release.argocd, module.eks, data.aws_eks_cluster.cluster]
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 # datadog helm chart
@@ -262,7 +282,11 @@ resource "helm_release" "datadog" {
     value = "true"
   }
 
-  depends_on = [module.eks]
+  depends_on = [module.eks, data.aws_eks_cluster.cluster]
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 data "kubernetes_service" "ingress_gateway" {

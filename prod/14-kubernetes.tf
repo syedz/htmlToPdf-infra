@@ -1,5 +1,4 @@
 # creating namespace application
-/*
 resource "kubernetes_namespace" "application" {
   metadata {
     name = "application"
@@ -32,10 +31,9 @@ resource "kubernetes_secret" "demo-repo" {
   }
   type = "Opaque"
 
-  depends_on = [module.eks, data.aws_eks_cluster.cluster]
+  depends_on = [helm_release.argocd, module.eks, data.aws_eks_cluster.cluster]
 
   lifecycle {
     ignore_changes = all
   }
 }
-*/

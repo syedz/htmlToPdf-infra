@@ -1,5 +1,4 @@
 # Route53 dns record for our base domain to nginx ingress nlb
-/*
 resource "aws_route53_record" "eks_domain" {
   zone_id = data.aws_route53_zone.base_domain.id
   name    = "*"
@@ -13,15 +12,7 @@ resource "aws_route53_record" "eks_domain" {
   depends_on               = [ helm_release.ingress-nginx ]
 }
 
-data "aws_lb" "ingress" {
-  name = regex(
-    "(^[^-]+)",
-    data.kubernetes_service.ingress_gateway.status[0].load_balancer[0].ingress[0].hostname
-  )[0]
-}
-*/
-
-/*
+# dns record validation for base_domain
 resource "aws_route53_record" "eks_domain_cert_validation_dns" {
   for_each = {
     for dvo in aws_acm_certificate.eks_domain_cert.domain_validation_options : dvo.domain_name => {
@@ -61,7 +52,6 @@ data "aws_lb" "ingress" {
     data.kubernetes_service.ingress_gateway.status[0].load_balancer[0].ingress[0].hostname
   )[0]
 }
-*/
 
 # Route 53 dns record for vpn
 resource "aws_route53_record" "bastion_host_record" {

@@ -2,6 +2,7 @@
 ### HELM RELEASES
 #####################################
 
+/*
 # helm chart for amazon lambda controller
 resource "helm_release" "ack-lambda" {
   name             = "ack-lambda"
@@ -289,11 +290,13 @@ resource "helm_release" "datadog" {
   }
 }
 
+*/
+
 data "kubernetes_service" "ingress_gateway" {
   metadata {
     name      = "ingress-nginx-controller"
-    namespace = helm_release.ingress-nginx.namespace
+    namespace = "ingress-nginx" # helm_release.ingress-nginx.namespace
   }
 
-  depends_on = [helm_release.ingress-nginx, module.eks]
+  depends_on = [module.eks]
 }

@@ -1,7 +1,7 @@
 variable "project_name" {
   type    = string
   description = "Project name for our resources"
-  default =  "htmlToPdf"
+  default =  "htmltopdf"
 }
 
 variable "base_domain" {

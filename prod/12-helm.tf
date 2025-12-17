@@ -263,7 +263,7 @@ resource "helm_release" "datadog" {
   }
   set {
     name  = "datadog.clusterName"
-    value = module.eks.cluster_name
+    value = lower(module.eks.cluster_name)
   }
   set {
     name  = "datadog.site"

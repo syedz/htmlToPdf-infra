@@ -18,6 +18,7 @@ resource "aws_ssm_parameter" "save_name_of_s3_for_output_files_to_ssm" {
   name        = "/${var.tag_env}/s3_bucket/for_output_files/name"
   description = "The URL for the created Amazon SQS queue"
   type        = "SecureString"
-  value       = "${var.tag_env}-app-output-files-${data.aws_caller_identity.current.account_id}"
+  value       = module.s3_bucket_for_output_files.s3_bucket_id
+  overwrite   = true
 }
 

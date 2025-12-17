@@ -21,6 +21,7 @@ resource "aws_ssm_parameter" "sqs_arn" {
   description = "The ARN the created Amazon SQS queue"
   type        = "SecureString"
   value       = module.sqs.queue_arn
+  overwrite   = true
 }
 
 # saving created sqs name into ssm
@@ -29,6 +30,7 @@ resource "aws_ssm_parameter" "sqs_name" {
   description = "Name of the created Amazon SQS queue"
   type        = "SecureString"
   value       = module.sqs.queue_name
+  overwrite   = true
 }
 
 # saving created sqs url into ssm
@@ -37,4 +39,5 @@ resource "aws_ssm_parameter" "sqs_url_path" {
   description = "The URL for the created Amazon SQS queue"
   type        = "SecureString"
   value       = module.sqs.queue_id
+  overwrite   = true
 }

@@ -28,4 +28,5 @@ resource "aws_ssm_parameter" "save_dynamodb_table_name_to_ssm" {
   description = "The URL for the created Amazon DynamoDB table name"
   type        = "SecureString"
   value       = "${var.tag_env}-${var.project_name}-pdf-files-per-user-descriptors"
+  overwrite   = true
 }

@@ -2,16 +2,32 @@
 ### LAMBDA MODULE
 #####################################
 
-module "iam_assumable_role_for_lambda_execution" {
-  source                            = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-  version                           = "5.33.1"
-  create_role                       = true
-  role_name                         = "${var.tag_env}-lambda-execution-role"
-  create_instance_profile           = true
-  role_requires_mfa                 = false
-  trusted_role_services             = ["lambda.amazonaws.com"]
-  custom_role_policy_arns           = [module.iam_policy_for_lambda_execution.arn]
-  number_of_custom_role_policy_arns = 1
+resource "aws_iam_role" "lambda_execution" {
+  name                  = "${var.tag_env}-lambda-execution-role"
+  force_detach_policies = true
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "lambda.amazonaws.com"
+        }
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_execution" {
+  role       = aws_iam_role.lambda_execution.name
+  policy_arn = module.iam_policy_for_lambda_execution.arn
+}
+
+resource "aws_iam_instance_profile" "lambda_execution" {
+  name = "${var.tag_env}-lambda-execution-role"
+  role = aws_iam_role.lambda_execution.name
 }
 
 ## IAM policy module
@@ -75,5 +91,6 @@ resource "aws_ssm_parameter" "save_lambda_iam_role_arn_to_ssm" {
   name        = "/${var.tag_env}/lambda/iam/role/arn"
   description = "The ARN of the IAM Role for Lambda execution"
   type        = "SecureString"
-  value       = module.iam_assumable_role_for_lambda_execution.iam_role_arn
+  value       = aws_iam_role.lambda_execution.arn
+  overwrite   = true
 }

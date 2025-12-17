@@ -92,5 +92,4 @@ resource "aws_ssm_parameter" "save_lambda_iam_role_arn_to_ssm" {
   description = "The ARN of the IAM Role for Lambda execution"
   type        = "SecureString"
   value       = aws_iam_role.lambda_execution.arn
-  overwrite   = true
 }

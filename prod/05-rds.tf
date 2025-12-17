@@ -53,7 +53,6 @@ resource "aws_ssm_parameter" "save_rds_db_name_to_ssm" {
   description = "RDS DB name"
   type        = "SecureString"
   value       = random_password.rds_db_name.result
-  overwrite   = true
 }
 
 # saving rds endpoint into ssm
@@ -62,7 +61,6 @@ resource "aws_ssm_parameter" "save_rds_endpoint_to_ssm" {
   description = "RDS endpoint"
   type        = "SecureString"
   value       = module.rds.endpoint
-  overwrite   = true
 }
 
 # saving rds password into ssm
@@ -71,7 +69,6 @@ resource "aws_ssm_parameter" "save_rds_password_to_ssm" {
   description = "RDS password"
   type        = "SecureString"
   value       = random_password.rds_password.result
-  overwrite   = true
 }
 
 # saving rds admin_username into ssm
@@ -80,5 +77,4 @@ resource "aws_ssm_parameter" "save_rds_admin_username_to_ssm" {
   description = "RDS username"
   type        = "SecureString"
   value       = random_password.rds_admin_username.result
-  overwrite   = true
 }

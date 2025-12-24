@@ -14,8 +14,10 @@ module "vpc" {
   private_subnets    = ["10.0.1.0/24", "10.0.2.0/24"]
   public_subnets     = ["10.0.4.0/24", "10.0.5.0/24"]
   database_subnets   = ["10.0.41.0/24", "10.0.42.0/24"]
+  enable_dns_hostnames = true
+  enable_dns_support   = true
 
-  tags                               = { "Name" = "${var.tag_env}-${var.project_name}-VPC" }
+  tags = { "Name" = "${var.tag_env}-${var.project_name}-VPC" }
   public_subnet_tags = {
     "Name" = "${var.tag_env}-${var.project_name}-Public-Subnet"
     "kubernetes.io/role/elb" = "1"

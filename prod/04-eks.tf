@@ -3,20 +3,20 @@
 #####################################
 
 module "eks" {
-  source                          = "terraform-aws-modules/eks/aws"
-  cluster_name                    = "${var.tag_env}-${var.project_name}-EKS"
-  version                         = "20.31.6"
-  cluster_version                 = "1.31"
-  cluster_endpoint_private_access = true
-  cluster_endpoint_public_access  = true
-  vpc_id                          = module.vpc.vpc_id
-  subnet_ids                      = module.vpc.private_subnets
+  source                  = "terraform-aws-modules/eks/aws"
+  name                    = "${var.tag_env}-${var.project_name}-EKS"
+  version                 = "21.10.1"
+  kubernetes_version      = "1.31"
+  endpoint_private_access = true
+  endpoint_public_access  = true
+  vpc_id                  = module.vpc.vpc_id
+  subnet_ids              = module.vpc.private_subnets
 
   # Cluster access entry
   # To add the current caller identity as an administrator
   enable_cluster_creator_admin_permissions = true
 
-  cluster_addons = {
+  addons = {
     coredns = {
       most_recent = true
     }

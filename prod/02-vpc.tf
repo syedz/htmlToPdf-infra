@@ -4,7 +4,7 @@
 
 module "vpc" {
   source             = "terraform-aws-modules/vpc/aws"
-  version            = "5.5.1"
+  version            = "6.5.1"
   name               = "${var.tag_env}-${var.project_name}-VPC"
   cidr               = "10.0.0.0/16"
   enable_nat_gateway = true

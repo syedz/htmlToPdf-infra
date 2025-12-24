@@ -6,7 +6,7 @@
 resource "helm_release" "ack-lambda" {
   name             = "ack-lambda"
   repository       = "oci://public.ecr.aws/aws-controllers-k8s"
-  version          = "1.4.0"
+  version          = "1.10.0"
   chart            = "lambda-chart"
   namespace        = "ack-lambda"
   create_namespace = "true"
@@ -66,7 +66,7 @@ resource "helm_release" "cert-manager" {
   chart            = "cert-manager"
   repository       = "https://charts.jetstack.io"
   namespace        = "cert-manager"
-  version          = "1.14.1"
+  version          = "v1.19.2"
   create_namespace = "true"
   set {
     name  = "installCRDs"
@@ -109,7 +109,7 @@ resource "helm_release" "ingress-nginx" {
   name       = "ingress-nginx"
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart      = "ingress-nginx"
-  version    = "4.9.1"
+  version    = "4.14.1"
   namespace  = "ingress-nginx"
   create_namespace = "true"
   timeout    = 600
@@ -171,7 +171,7 @@ resource "helm_release" "argocd" {
   create_namespace = "true"
   chart            = "argo-cd"
   namespace        = "argocd"
-  version          = "5.53.14"
+  version          = "9.2.1"
   repository       = "https://argoproj.github.io/argo-helm"
   timeout          = 300
 
@@ -219,7 +219,7 @@ resource "helm_release" "argocd-apps" {
   name       = "argocd-apps"
   chart      = "argocd-apps"
   namespace  = "argocd"
-  version    = "1.6.1"
+  version    = "2.0.2"
   repository = "https://argoproj.github.io/argo-helm"
   timeout    = 300
 
@@ -250,7 +250,7 @@ resource "helm_release" "datadog" {
   repository       = "https://helm.datadoghq.com"
   chart            = "datadog"
   namespace        = "datadog"
-  version          = "3.53.2"
+  version          = "3.157.1"
   create_namespace = "true"
   timeout          = 300
   set {

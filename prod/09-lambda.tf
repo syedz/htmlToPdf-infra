@@ -33,7 +33,7 @@ resource "aws_iam_instance_profile" "lambda_execution" {
 ## IAM policy module
 module "iam_policy_for_lambda_execution" {
   source      = "terraform-aws-modules/iam/aws//modules/iam-policy"
-  version     = "~> 5.33.1"
+  version     = "6.2.3"
   name        = "${var.tag_env}-${var.project_name}-lambda-execution-policy"
   path        = "/"
   description = "For lambda execution"

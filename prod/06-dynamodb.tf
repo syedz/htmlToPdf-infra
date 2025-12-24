@@ -3,8 +3,8 @@
 #####################################
 
 module "dynamodb" {
-  source = "terraform-aws-modules/dynamodb-table/aws"
-  version      = "4.0.0"
+  source       = "terraform-aws-modules/dynamodb-table/aws"
+  version      = "5.4.0"
   create_table = true
 
   name = "${var.tag_env}-${var.project_name}-pdf-files-per-user-descriptors"

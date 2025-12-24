@@ -4,7 +4,7 @@
 
 module "sqs" {
   source  = "terraform-aws-modules/sqs/aws"
-  version = "4.1.0"
+  version = "5.1.0"
 
   content_based_deduplication = true
   fifo_queue                  = true

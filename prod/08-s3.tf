@@ -4,7 +4,7 @@
 
 module "s3_bucket_for_output_files" {
   source = "terraform-aws-modules/s3-bucket/aws"
-  version       = "4.1.0"
+  version       = "5.9.1"
   create_bucket = true
   control_object_ownership = true
   object_ownership         = "ObjectWriter"

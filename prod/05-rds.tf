@@ -4,7 +4,7 @@
 
 module "rds" {
   source  = "cloudposse/rds-cluster/aws"
-  version = "1.7.0"
+  version = "2.3.0"
 
   name                 = "${var.tag_env}-${var.project_name}-RDS" #"rds"
   engine               = "aurora-mysql"       #"aurora-postgresql"

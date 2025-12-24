@@ -1,5 +1,5 @@
 # creating namespace application
-resource "kubernetes_namespace" "application" {
+resource "kubernetes_namespace_v1" "application" {
   metadata {
     name = "application"
   }
@@ -12,7 +12,7 @@ resource "kubernetes_namespace" "application" {
 }
 
 # creating repo in argocd
-resource "kubernetes_secret" "demo-repo" {
+resource "kubernetes_secret_v1" "demo-repo" {
   metadata {
     name      = "${var.tag_env}-${var.project_name}-repo"
     namespace = "argocd"

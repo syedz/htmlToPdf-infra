@@ -316,7 +316,7 @@ resource "helm_release" "datadog" {
   }
 }
 
-data "kubernetes_service" "ingress_gateway" {
+data "kubernetes_service_v1" "ingress_gateway" {
   metadata {
     name      = "ingress-nginx-controller"
     namespace = helm_release.ingress-nginx.namespace

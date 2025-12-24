@@ -18,13 +18,13 @@ module "dynamodb" {
   hash_key = "username"
 
   tags = {
-    Environment = "${var.tag_env}"
+    Environment = "${var.tag_env}-${var.project_name}"
   }
 }
 
 # saving dynamodb table name into ssm
 resource "aws_ssm_parameter" "save_dynamodb_table_name_to_ssm" {
-  name        = "/${var.tag_env}/dynamodb/table_name"
+  name        = "/${var.tag_env}-${var.project_name}/dynamodb/table_name"
   description = "The URL for the created Amazon DynamoDB table name"
   type        = "SecureString"
   value       = "${var.tag_env}-${var.project_name}-pdf-files-per-user-descriptors"

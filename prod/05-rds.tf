@@ -49,7 +49,7 @@ resource "random_password" "rds_admin_username" {
 }
 
 resource "aws_ssm_parameter" "save_rds_db_name_to_ssm" {
-  name        = "/${var.tag_env}/rds/db_name"
+  name        = "/${var.tag_env}-${var.project_name}/rds/db_name"
   description = "RDS DB name"
   type        = "SecureString"
   value       = random_password.rds_db_name.result
@@ -57,7 +57,7 @@ resource "aws_ssm_parameter" "save_rds_db_name_to_ssm" {
 
 # saving rds endpoint into ssm
 resource "aws_ssm_parameter" "save_rds_endpoint_to_ssm" {
-  name        = "/${var.tag_env}/rds/endpoint"
+  name        = "/${var.tag_env}-${var.project_name}/rds/endpoint"
   description = "RDS endpoint"
   type        = "SecureString"
   value       = module.rds.endpoint
@@ -65,7 +65,7 @@ resource "aws_ssm_parameter" "save_rds_endpoint_to_ssm" {
 
 # saving rds password into ssm
 resource "aws_ssm_parameter" "save_rds_password_to_ssm" {
-  name        = "/${var.tag_env}/rds/password"
+  name        = "/${var.tag_env}-${var.project_name}/rds/password"
   description = "RDS password"
   type        = "SecureString"
   value       = random_password.rds_password.result
@@ -73,7 +73,7 @@ resource "aws_ssm_parameter" "save_rds_password_to_ssm" {
 
 # saving rds admin_username into ssm
 resource "aws_ssm_parameter" "save_rds_admin_username_to_ssm" {
-  name        = "/${var.tag_env}/rds/username"
+  name        = "/${var.tag_env}-${var.project_name}/rds/username"
   description = "RDS username"
   type        = "SecureString"
   value       = random_password.rds_admin_username.result

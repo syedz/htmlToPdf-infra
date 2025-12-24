@@ -28,7 +28,7 @@ resource "aws_security_group" "bastion_host" {
   }
 
   tags = {
-    Name = "bastion_host-${var.tag_env}"
+    Name = "bastion_host-${var.tag_env}-${var.project_name}"
 
   }
 }
@@ -55,7 +55,7 @@ resource "aws_instance" "bastion_host" {
     ]
   }
   tags = {
-    Name = "${var.tag_env}-bastion_host"
+    Name = "${var.tag_env}-${var.project_name}-bastion_host"
   }
 }
 

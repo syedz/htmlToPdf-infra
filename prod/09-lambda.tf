@@ -3,7 +3,7 @@
 #####################################
 
 resource "aws_iam_role" "lambda_execution" {
-  name                  = "${var.tag_env}-lambda-execution-role"
+  name                  = "${var.tag_env}-${var.project_name}-lambda-execution-role"
   force_detach_policies = true
 
   assume_role_policy = jsonencode({
@@ -26,7 +26,7 @@ resource "aws_iam_role_policy_attachment" "lambda_execution" {
 }
 
 resource "aws_iam_instance_profile" "lambda_execution" {
-  name = "${var.tag_env}-lambda-execution-role"
+  name = "${var.tag_env}-${var.project_name}-lambda-execution-role"
   role = aws_iam_role.lambda_execution.name
 }
 
@@ -34,7 +34,7 @@ resource "aws_iam_instance_profile" "lambda_execution" {
 module "iam_policy_for_lambda_execution" {
   source      = "terraform-aws-modules/iam/aws//modules/iam-policy"
   version     = "~> 5.33.1"
-  name        = "${var.tag_env}-lambda-execution-policy"
+  name        = "${var.tag_env}-${var.project_name}-lambda-execution-policy"
   path        = "/"
   description = "For lambda execution"
   policy      = <<EOF
@@ -88,7 +88,7 @@ EOF
 
 # saving iam role arn in ssm
 resource "aws_ssm_parameter" "save_lambda_iam_role_arn_to_ssm" {
-  name        = "/${var.tag_env}/lambda/iam/role/arn"
+  name        = "/${var.tag_env}-${var.project_name}/lambda/iam/role/arn"
   description = "The ARN of the IAM Role for Lambda execution"
   type        = "SecureString"
   value       = aws_iam_role.lambda_execution.arn

@@ -14,7 +14,7 @@ resource "kubernetes_namespace" "application" {
 # creating repo in argocd
 resource "kubernetes_secret" "demo-repo" {
   metadata {
-    name      = "${var.tag_env}-repo"
+    name      = "${var.tag_env}-${var.project_name}-repo"
     namespace = "argocd"
     labels = {
       "argocd.argoproj.io/secret-type" = "repository"

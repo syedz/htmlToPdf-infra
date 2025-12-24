@@ -15,8 +15,8 @@ module "vpc" {
   public_subnets     = ["10.0.4.0/24", "10.0.5.0/24"]
   database_subnets   = ["10.0.41.0/24", "10.0.42.0/24"]
 
-  tags                               = { "Name" = "${var.tag_env}-VPC" }
-  public_subnet_tags                 = { "Name" = "${var.tag_env}-Public-Subnet" }
-  private_subnet_tags                = { "Name" = "${var.tag_env}-Private-Subnet" }
-  database_subnet_tags               = { "Name" = "${var.tag_env}-Database-Subnet" }
+  tags                               = { "Name" = "${var.tag_env}-${var.project_name}-VPC" }
+  public_subnet_tags                 = { "Name" = "${var.tag_env}-${var.project_name}-Public-Subnet" }
+  private_subnet_tags                = { "Name" = "${var.tag_env}-${var.project_name}-Private-Subnet" }
+  database_subnet_tags               = { "Name" = "${var.tag_env}-${var.project_name}-Database-Subnet" }
 }

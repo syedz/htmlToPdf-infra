@@ -15,7 +15,7 @@ module "s3_bucket_for_output_files" {
 
 # saving s3 bucket output files into ssm
 resource "aws_ssm_parameter" "save_name_of_s3_for_output_files_to_ssm" {
-  name        = "/${var.tag_env}/s3_bucket/for_output_files/name"
+  name        = "/${var.tag_env}-${var.project_name}/s3_bucket/for_output_files/name"
   description = "The URL for the created Amazon SQS queue"
   type        = "SecureString"
   value       = module.s3_bucket_for_output_files.s3_bucket_id

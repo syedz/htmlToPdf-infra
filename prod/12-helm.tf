@@ -251,7 +251,6 @@ resource "helm_release" "argocd-apps" {
     {
       name  = "applications[0].source.repoURL"
       value = "https://github.com/${var.cd_project_repo}"
-      type  = "string"
     },
     {
       name  = "applications[0].source.targetRevision"

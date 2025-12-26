@@ -2,43 +2,43 @@
 # @default -- `[]` (See [values.yaml])
 ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
 applications:
- - name: demo
-   namespace: argocd
-   additionalLabels: {}
-   additionalAnnotations: {}
-  #  finalizers:
-  #   - resources-finalizer.argocd.argoproj.io
-   project: default
-   source:
-     repoURL: placeholder
-     targetRevision: HEAD
-     path: demoapp
-     directory:
-       recurse: true
-#   # ArgoCD v2.6 or later
-#   sources:
-#    - chart: elasticsearch
-#      repoURL: https://helm.elastic.co
-#      targetRevision: 8.5.1
-#    - repoURL: https://github.com/argoproj/argocd-example-apps.git
-#      path: guestbook
-#      targetRevision: HEAD
-   destination:
-     server: https://kubernetes.default.svc
-     namespace: application
-   syncPolicy:
-     automated:
-       prune: false
-       selfHeal: false
-   revisionHistoryLimit: null
-   ignoreDifferences:
-   - group: apps
-     kind: Deployment
-     jsonPointers:
-     - /spec/replicas
-   info:
-   - name: url
-     value: https://argoproj.github.io/
+  - name: "demo"
+    namespace: argocd
+    additionalLabels: {}
+    additionalAnnotations: {}
+    #  finalizers:
+    #   - resources-finalizer.argocd.argoproj.io
+    project: default
+    source:
+      repoURL: placeholder
+      targetRevision: HEAD
+      path: demoapp
+      directory:
+        recurse: true
+    #   # ArgoCD v2.6 or later
+    #   sources:
+    #    - chart: elasticsearch
+    #      repoURL: https://helm.elastic.co
+    #      targetRevision: 8.5.1
+    #    - repoURL: https://github.com/argoproj/argocd-example-apps.git
+    #      path: guestbook
+    #      targetRevision: HEAD
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: application
+    syncPolicy:
+      automated:
+        prune: false
+        selfHeal: false
+    revisionHistoryLimit: null
+    ignoreDifferences:
+      - group: apps
+        kind: Deployment
+        jsonPointers:
+          - /spec/replicas
+    info:
+      - name: url
+        value: https://argoproj.github.io/
 
 # -- Deploy Argo CD Projects within this helm release
 # @default -- `[]` (See [values.yaml])
@@ -137,7 +137,8 @@ applicationsets: []
 # @default -- `[]` (See [values.yaml])
 ## This function in tech preview stage, do expect unstability or breaking changes in newer versions. Bump image.tag if necessary.
 ## Ref: https://github.com/argoproj-labs/argocd-extensions
-extensions: []
+extensions:
+  []
   # - name: example
   #   namespace: argocd
   #   additionalLabels: {}

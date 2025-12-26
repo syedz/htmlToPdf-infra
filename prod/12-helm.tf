@@ -12,6 +12,9 @@ resource "helm_release" "ack-lambda" {
   create_namespace = "true"
   timeout          = 600
 
+  force_update     = true
+  recreate_pods    = true
+
   set = [
     {
       name  = "aws.region"
@@ -252,9 +255,14 @@ resource "helm_release" "argocd-apps" {
     },
     {
       name  = "applications[0].source.targetRevision"
-      value = var.tag_env
+      value = tostring(var.tag_env)
       type  = "string"
-    }
+    },
+    {
+      name  = "applications[0].name"
+      value = tostring(var.tag_env)
+      type  = "string"
+    },
   ]
   
   values = [

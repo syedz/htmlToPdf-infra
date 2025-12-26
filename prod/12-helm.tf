@@ -251,19 +251,22 @@ resource "helm_release" "argocd-apps" {
     {
       name  = "applications[0].source.repoURL"
       value = "https://github.com/${var.cd_project_repo}"
+      type  = "string"
     },
     {
       name  = "applications[0].source.targetRevision"
-      value = tostring(var.tag_env)
+      value = format("%s", var.tag_env)
+      type  = "string"
     },
     {
       name  = "applications[0].name"
-      value = tostring(var.tag_env)
+      value = format("%s", var.tag_env)
+      type  = "string"
     },
   ]
   
   values = [
-    "${file("helm-chart-values/argo-cd-apps-values.yaml")}"
+    file("helm-chart-values/argo-cd-apps-values.yaml")
   ]
 
   depends_on = [helm_release.argocd, module.eks, data.aws_eks_cluster.cluster]

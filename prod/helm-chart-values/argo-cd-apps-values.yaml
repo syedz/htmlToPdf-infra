@@ -2,7 +2,7 @@
 # @default -- `[]` (See [values.yaml])
 ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
 applications:
-  - name: "demo"
+  - name: demo
     namespace: argocd
     additionalLabels: {}
     additionalAnnotations: {}

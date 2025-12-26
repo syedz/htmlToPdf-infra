@@ -256,12 +256,10 @@ resource "helm_release" "argocd-apps" {
     {
       name  = "applications[0].source.targetRevision"
       value = tostring(var.tag_env)
-      type  = "string"
     },
     {
       name  = "applications[0].name"
       value = tostring(var.tag_env)
-      type  = "string"
     },
   ]
   

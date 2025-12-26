@@ -77,7 +77,7 @@ resource "helm_release" "cert-manager" {
     {
       name  = "installCRDs"
       value = "true"
-      type  = "string"
+      type  = "boolean"
     }
   ]
 

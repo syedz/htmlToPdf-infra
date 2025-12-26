@@ -2,27 +2,17 @@
 # @default -- `[]` (See [values.yaml])
 ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
 applications:
-  - name: demo
+  - name: "${app_name}"
     namespace: argocd
     additionalLabels: {}
     additionalAnnotations: {}
-    #  finalizers:
-    #   - resources-finalizer.argocd.argoproj.io
     project: default
     source:
-      repoURL: placeholder
-      targetRevision: HEAD
+      repoURL: ${repo_url}
+      targetRevision: ${target_revision}
       path: demoapp
       directory:
         recurse: true
-    #   # ArgoCD v2.6 or later
-    #   sources:
-    #    - chart: elasticsearch
-    #      repoURL: https://helm.elastic.co
-    #      targetRevision: 8.5.1
-    #    - repoURL: https://github.com/argoproj/argocd-example-apps.git
-    #      path: guestbook
-    #      targetRevision: HEAD
     destination:
       server: https://kubernetes.default.svc
       namespace: application

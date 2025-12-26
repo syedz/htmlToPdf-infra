@@ -246,27 +246,13 @@ resource "helm_release" "argocd-apps" {
   version    = "2.0.2"
   repository = "https://argoproj.github.io/argo-helm"
   timeout    = 300
-
-  set = [
-    {
-      name  = "applications[0].source.repoURL"
-      value = "https://github.com/${var.cd_project_repo}"
-      type  = "string"
-    },
-    {
-      name  = "applications[0].source.targetRevision"
-      value = format("%s", var.tag_env)
-      type  = "string"
-    },
-    {
-      name  = "applications[0].name"
-      value = format("%s", var.tag_env)
-      type  = "string"
-    },
-  ]
   
   values = [
-    file("helm-chart-values/argo-cd-apps-values.yaml")
+    templatefile("helm-chart-values/argo-cd-apps-values.yaml", {
+      app_name        = tostring(var.tag_env)
+      repo_url        = "https://github.com/${var.cd_project_repo}"
+      target_revision = tostring(var.tag_env)
+    })
   ]
 
   depends_on = [helm_release.argocd, module.eks, data.aws_eks_cluster.cluster]
